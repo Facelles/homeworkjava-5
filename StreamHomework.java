@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Objects;
 import java.util.Spliterator;
@@ -91,7 +92,14 @@ public class StreamHomework {
      * Завдання 4: Лінійний конгруентний генератор (LCG)
      */
     public static Stream<Long> linearCongruentialGenerator(long seed, long a, long c, long m) {
-        return Stream.iterate(seed, x -> (a * x + c) % m);
+        BigInteger multiplier = BigInteger.valueOf(a);
+        BigInteger increment = BigInteger.valueOf(c);
+        BigInteger modulus = BigInteger.valueOf(m);
+        return Stream.iterate(seed, x -> BigInteger.valueOf(x)
+                .multiply(multiplier)
+                .add(increment)
+                .mod(modulus)
+                .longValue());
     }
 
     /**
